@@ -38,7 +38,7 @@
             if (!userAlreadyExists)
             {
                 int userId = forumData.Users.LastOrDefault()?.Id + 1 ?? 1;
-                var user = new User(userId, username, password);
+                var user = new User(userId, username, password, new List<int>());
                 forumData.Users.Add(user);
                 forumData.SaveChages();
 

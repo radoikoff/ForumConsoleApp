@@ -16,6 +16,16 @@ namespace Forum.Models
             this.ReplyIds = replyIds;
         }
 
+        //public Post(int id, string title, string content, int categoryId, int authorId)
+        //{
+        //    this.Id = id;
+        //    this.Title = title;
+        //    this.Content = content;
+        //    this.CategoryId = categoryId;
+        //    this.AuthorId = authorId;
+        //    this.ReplyIds = new List<int> { 0 };
+        //}
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

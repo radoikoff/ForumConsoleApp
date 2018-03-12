@@ -119,7 +119,7 @@
                 case MenuState.Back:
                     this.Back();
                     break;
-				case MenuState.Error:
+                case MenuState.Error:
                 case MenuState.Rerender:
                     RenderCurrentView();
                     break;
@@ -164,7 +164,7 @@
         {
             var categoryController = (CategoryController)this.CurrentController;
 
-            var categoryId = categoryController .CategoryId;
+            var categoryId = categoryController.CategoryId;
 
             var posts = PostService.GetPostsByCategory(categoryId).ToArray();
             int postIndex = categoryController.CurrentPage * CategoryController.PAGE_OFFSET + this.currentOptionIndex;
@@ -190,7 +190,15 @@
 
         private void AddPost()
         {
-            throw new NotImplementedException();
+            var addPostController = (AddPostController)this.CurrentController;
+            int postId = addPostController.Post.PostId;
+
+            var postViewer = (PostDetailsController)this.controllers[(int)MenuState.ViewPost];
+            postViewer.SetPostId(postId);
+            addPostController.ResetPost();
+
+            this.controllerHistory.Pop();
+            this.RedirectToMenu(MenuState.ViewPost);
         }
 
         private void RenderCurrentView()
@@ -202,7 +210,7 @@
 
         private bool RedirectToMenu(MenuState newState)
         {
-            if (this.State!=newState)
+            if (this.State != newState)
             {
                 this.controllerHistory.Push((int)newState);
                 this.RenderCurrentView();

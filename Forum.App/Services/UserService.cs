@@ -46,5 +46,19 @@
             }
             return SignUpStatus.UsernameTakenError;
         }
+
+        public static User GetUser(int userId)
+        {
+            var forumData = new ForumData();
+            var user = forumData.Users.Find(u => u.Id == userId);
+            return user;
+        }
+
+        public static User GetUser(string username)
+        {
+            var forumData = new ForumData();
+            var user = forumData.Users.Find(u => u.Username == username);
+            return user;
+        }
     }
 }

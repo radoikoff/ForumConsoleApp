@@ -14,6 +14,14 @@ namespace Forum.Models
             this.PostIds = postIds;
         }
 
+        public User(int id, string username, string password)
+        {
+            this.Id = id;
+            this.Username = username;
+            this.Password = password;
+            this.PostIds = new List<int>() { 0 };
+        }
+
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

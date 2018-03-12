@@ -20,7 +20,7 @@
 
         public void UserLogIn()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         public void UserLogOut()

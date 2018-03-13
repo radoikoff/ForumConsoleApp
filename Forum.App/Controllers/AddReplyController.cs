@@ -37,6 +37,7 @@
             switch ((Command)index)
             {
                 case Command.Write:
+                    this.TextArea.Text = string.Empty;
                     this.TextArea.Write();
                     this.Reply.Content = this.TextArea.Lines.ToList();
                     return MenuState.AddReply;
@@ -71,7 +72,8 @@
             this.Error = false;
             this.Reply = new ReplyViewModel();
             this.PostId = 0;
-            this.TextArea = new TextArea(centerLeft - 18, centerTop - 7, TEXT_AREA_WIDTH, TEXT_AREA_HEIGHT, POST_MAX_LENGTH);
+            //this.TextArea = new TextArea(centerLeft - 18, centerTop - 7, TEXT_AREA_WIDTH, TEXT_AREA_HEIGHT, POST_MAX_LENGTH);
+            this.TextArea = new TextArea(centerLeft - 18, centerTop - 4, TEXT_AREA_WIDTH, TEXT_AREA_HEIGHT, POST_MAX_LENGTH);
         }
 
         private enum Command

@@ -28,7 +28,11 @@ namespace Forum.App.Services
             foreach (var replyId in post.ReplyIds)
             {
                 var reply = forumData.Replies.Find(r => r.Id == replyId);
-                replies.Add(new ReplyViewModel(reply));
+                if (reply != null)
+                {
+                    replies.Add(new ReplyViewModel(reply));
+                }
+
             }
 
             return replies;
@@ -94,10 +98,11 @@ namespace Forum.App.Services
 
             var content = string.Join("", postView.Content);
 
-            Post post = new Post(postId, postView.Title, content, category.Id, authorId, new List<int>() { 1 });
+            Post post = new Post(postId, postView.Title, content, category.Id, authorId, new List<int>());
 
             forumData.Posts.Add(post);
-            author.PostIds.Add(post.Id);
+            forumData.Users.Find(u => u.Id == authorId).PostIds.Add(post.Id);
+            //author.PostIds.Add(post.Id);
             category.Posts.Add(post.Id);
             forumData.SaveChages();
 
@@ -127,7 +132,7 @@ namespace Forum.App.Services
             Reply reply = new Reply(replyId, content, authorId, postId);
 
             forumData.Replies.Add(reply);
-            forumData.Posts.First(p=>p.Id == postId).ReplyIds.Add(replyId);
+            forumData.Posts.First(p => p.Id == postId).ReplyIds.Add(replyId);
             forumData.SaveChages();
 
             //replyView.PostId = postId;

@@ -12,12 +12,12 @@ namespace Forum.Models
             this.Posts = posts;
         }
 
-        //public Category(int id, string name)
-        //{
-        //    this.Id = id;
-        //    this.Name = name;
-        //    this.Posts = new List<int>();
-        //}
+        public Category(int id, string name)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Posts = new List<int>();
+        }
 
         public int Id { get; set; }
         public string Name { get; set; }

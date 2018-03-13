@@ -137,12 +137,25 @@
 
         private void AddReply()
         {
-            throw new NotImplementedException();
+            var addReplyController = (AddReplyController )this.CurrentController;
+            var postId = addReplyController.PostId;
+
+            var postController = (PostDetailsController)this.controllers[(int)MenuState.ViewPost];
+            postController.SetPostId(postId);
+
+            this.RedirectToMenu(MenuState.ViewPost);
+            //throw new NotImplementedException();
         }
 
         private void RedirectToAddReply()
         {
-            throw new NotImplementedException();
+            var postDetailsController = (PostDetailsController)this.CurrentController;
+            var postId = postDetailsController.PostId;
+
+            var addReplyController = (AddReplyController)this.controllers[(int)MenuState.AddReply];
+
+            addReplyController.SetPostId(postId);
+            this.RedirectToMenu(MenuState.AddReply);
         }
 
         private void LogOut()

@@ -106,6 +106,33 @@ namespace Forum.App.Services
             return true;
         }
 
+        public static bool TrySaveReply(ReplyViewModel replyView, int postId)
+        {
+            bool emptyContent = !replyView.Content.Any();
 
+            if (emptyContent)
+            {
+                return false;
+            }
+
+            var forumData = new ForumData();
+
+            int replyId = forumData.Replies.Any() ? forumData.Replies.Last().Id + 1 : 1;
+
+            User author = UserService.GetUser(replyView.Author);
+            int authorId = author.Id;
+
+            var content = string.Join("", replyView.Content);
+
+            Reply reply = new Reply(replyId, content, authorId, postId);
+
+            forumData.Replies.Add(reply);
+            forumData.Posts.First(p=>p.Id == postId).ReplyIds.Add(replyId);
+            forumData.SaveChages();
+
+            //replyView.PostId = postId;
+
+            return true;
+        }
     }
 }
